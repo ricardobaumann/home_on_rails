@@ -11,12 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160411161411) do
+ActiveRecord::Schema.define(version: 20160411164329) do
+
+  create_table "metric_units", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "product_groups", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "products", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "product_group_id"
+    t.integer  "metric_unit_id"
+    t.decimal  "unit_prize"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "products", ["metric_unit_id"], name: "index_products_on_metric_unit_id"
+  add_index "products", ["product_group_id"], name: "index_products_on_product_group_id"
 
 end

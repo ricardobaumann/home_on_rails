@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @product.name %>
+</p>
+
+<p>
+  <strong>Product group:</strong>
+  <%= @product.product_group %>
+</p>
+
+<p>
+  <strong>Metric unit:</strong>
+  <%= @product.metric_unit %>
+</p>
+
+<p>
+  <strong>Unit prize:</strong>
+  <%= @product.unit_prize %>
+</p>
+
+<%= link_to 'Edit', edit_product_path(@product) %> |
+<%= link_to 'Back', products_path %>
