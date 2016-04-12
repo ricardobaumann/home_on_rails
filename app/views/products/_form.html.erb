@@ -15,14 +15,17 @@
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
+
   <div class="field">
-    <%= f.label :product_group_id %><br>
-    <%= f.text_field :product_group_id %>
+    <%= f.label :product_group %><br />
+    <%= f.select :product_group_id, options_for_select(ProductGroup.all.map{|s|[s.name, s.id]},@product.product_group_id) %>
   </div>
+
   <div class="field">
-    <%= f.label :metric_unit_id %><br>
-    <%= f.text_field :metric_unit_id %>
+    <%= f.label :metric_unit %><br />
+    <%= f.select :metric_unit_id, options_for_select(MetricUnit.all.map{|s|[s.name, s.id]}, @product.metric_unit_id) %>
   </div>
+
   <div class="field">
     <%= f.label :unit_prize %><br>
     <%= f.text_field :unit_prize %>

@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :stock_items
+  resources :stocks
+  resources :stock_operations
   resources :products
   resources :metric_units
   resources :product_groups

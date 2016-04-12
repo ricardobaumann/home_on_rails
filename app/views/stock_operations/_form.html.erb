@@ -1,0 +1,25 @@
+<%= form_for(@stock_operation) do |f| %>
+  <% if @stock_operation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@stock_operation.errors.count, "error") %> prohibited this stock_operation from being saved:</h2>
+
+      <ul>
+      <% @stock_operation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :type %><br>
+    <%= f.number_field :stock_type %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
