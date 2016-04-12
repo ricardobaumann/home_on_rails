@@ -5,4 +5,8 @@ class Product < ActiveRecord::Base
   validates_presence_of :name, :product_group, :metric_unit
 
   validates_uniqueness_of :name, scope: :product_group
+
+  def to_s
+  	"#{name} - #{metric_unit}"
+  end
 end

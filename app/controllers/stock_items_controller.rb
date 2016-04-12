@@ -5,7 +5,7 @@ class StockItemsController < ApplicationController
   # GET /stock_items
   # GET /stock_items.json
   def index
-    @stock_items = StockItem.all
+    @stock_items = StockItem.where(stock: @stock)
   end
 
   def set_stock
@@ -47,7 +47,7 @@ class StockItemsController < ApplicationController
   def update
     respond_to do |format|
       if @stock_item.update(stock_item_params)
-        format.html { redirect_to @stock_item, notice: 'Stock item was successfully updated.' }
+        format.html { redirect_to [@stock, @stock_item], notice: 'Stock item was successfully updated.' }
         format.json { render :show, status: :ok, location: @stock_item }
       else
         format.html { render :edit }
