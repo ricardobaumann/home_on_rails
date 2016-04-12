@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  resources :stock_items
-  resources :stocks
+  resources :stocks do
+    resources :stock_items
+  end
   resources :stock_operations
   resources :products
   resources :metric_units

@@ -1,10 +1,15 @@
 class StockItemsController < ApplicationController
   before_action :set_stock_item, only: [:show, :edit, :update, :destroy]
 
+  before_action :set_stock
   # GET /stock_items
   # GET /stock_items.json
   def index
     @stock_items = StockItem.all
+  end
+
+  def set_stock
+    @stock = Stock.find(params[:stock_id]) if params[:stock_id]
   end
 
   # GET /stock_items/1
@@ -25,10 +30,10 @@ class StockItemsController < ApplicationController
   # POST /stock_items.json
   def create
     @stock_item = StockItem.new(stock_item_params)
-
+    @stock_item.stock = @stock
     respond_to do |format|
       if @stock_item.save
-        format.html { redirect_to @stock_item, notice: 'Stock item was successfully created.' }
+        format.html { redirect_to [@stock, @stock_item], notice: 'Stock item was successfully created.' }
         format.json { render :show, status: :created, location: @stock_item }
       else
         format.html { render :new }
@@ -56,7 +61,7 @@ class StockItemsController < ApplicationController
   def destroy
     @stock_item.destroy
     respond_to do |format|
-      format.html { redirect_to stock_items_url, notice: 'Stock item was successfully destroyed.' }
+      format.html { redirect_to stock_stock_items_url(@stock), notice: 'Stock item was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

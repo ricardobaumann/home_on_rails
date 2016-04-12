@@ -22,9 +22,9 @@
         <td><%= stock_item.unit_prize %></td>
         <td><%= stock_item.amount %></td>
         <td><%= stock_item.item_prize %></td>
-        <td><%= link_to 'Show', stock_item %></td>
-        <td><%= link_to 'Edit', edit_stock_item_path(stock_item) %></td>
-        <td><%= link_to 'Destroy', stock_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', [@stock, stock_item] %></td>
+        <td><%= link_to 'Edit', edit_stock_stock_item_path(@stock,stock_item) %></td>
+        <td><%= link_to 'Destroy', [@stock, stock_item], method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -32,4 +32,4 @@
 
 <br>
 
-<%= link_to 'New Stock item', new_stock_item_path %>
+<%= link_to 'New Stock item', new_stock_stock_item_path(@stock) %>

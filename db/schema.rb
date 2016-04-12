@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160412081914) do
+ActiveRecord::Schema.define(version: 20160412083105) do
 
   create_table "metric_units", force: :cascade do |t|
     t.string   "name"
@@ -36,6 +36,19 @@ ActiveRecord::Schema.define(version: 20160412081914) do
 
   add_index "products", ["metric_unit_id"], name: "index_products_on_metric_unit_id"
   add_index "products", ["product_group_id"], name: "index_products_on_product_group_id"
+
+  create_table "stock_items", force: :cascade do |t|
+    t.integer  "stock_id"
+    t.integer  "product_id"
+    t.decimal  "unit_prize"
+    t.decimal  "amount"
+    t.decimal  "item_prize"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "stock_items", ["product_id"], name: "index_stock_items_on_product_id"
+  add_index "stock_items", ["stock_id"], name: "index_stock_items_on_stock_id"
 
   create_table "stock_operations", force: :cascade do |t|
     t.integer  "stock_type"
