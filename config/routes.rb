@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'monthly_expenses_report/show'
+
   resources :stocks do
     resources :stock_items
   end
@@ -6,6 +8,8 @@ Rails.application.routes.draw do
   resources :products
   resources :metric_units
   resources :product_groups
+
+  root to: 'stocks#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

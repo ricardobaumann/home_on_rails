@@ -10,5 +10,11 @@
   <%= @stock.stock_operation %>
 </p>
 
+<p>
+  <strong>Total price:</strong>
+  <%= @stock.total_price %>
+</p>
+
 <%= link_to 'Edit', edit_stock_path(@stock) %> |
-<%= link_to 'Back', stocks_path %>
+<%= link_to 'Back', stocks_path %> |
+<%= link_to 'Items', stock_stock_items_path(@stock) %>

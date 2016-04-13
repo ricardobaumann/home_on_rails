@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160412083105) do
+ActiveRecord::Schema.define(version: 20160412141557) do
 
   create_table "metric_units", force: :cascade do |t|
     t.string   "name"
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 20160412083105) do
     t.integer  "stock_operation_id"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+    t.decimal  "price"
   end
 
   add_index "stocks", ["stock_operation_id"], name: "index_stocks_on_stock_operation_id"

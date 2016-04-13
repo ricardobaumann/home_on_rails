@@ -4,7 +4,7 @@ class StocksController < ApplicationController
   # GET /stocks
   # GET /stocks.json
   def index
-    @stocks = Stock.all
+    @stocks = Stock.order(entry_date: :desc)
   end
 
   # GET /stocks/1

@@ -1,0 +1,32 @@
+
+
+<h2>Listing balance per month</h2>
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Month</th>
+      <th>Total income</th>
+      <th>Total outcome</th>
+      <th>Balance</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @months.each do |month| %>
+
+      <tr>
+        <td><%= month["month"] %></td>
+        <td><%= month["income"] %></td>
+        <td><%= month["outcome"] %></td>
+        <td><%= month["balance"] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+
+
