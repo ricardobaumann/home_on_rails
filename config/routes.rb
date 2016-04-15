@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :places
+  get 'reports/show'
+
   get 'monthly_expenses_report/show'
 
   resources :stocks do

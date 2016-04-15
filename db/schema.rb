@@ -11,10 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160412141557) do
+ActiveRecord::Schema.define(version: 20160415095012) do
 
   create_table "metric_units", force: :cascade do |t|
     t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "places", force: :cascade do |t|
+    t.string   "name"
+    t.text     "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -63,8 +70,10 @@ ActiveRecord::Schema.define(version: 20160412141557) do
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.decimal  "price"
+    t.integer  "place_id"
   end
 
+  add_index "stocks", ["place_id"], name: "index_stocks_on_place_id"
   add_index "stocks", ["stock_operation_id"], name: "index_stocks_on_stock_operation_id"
 
 end
