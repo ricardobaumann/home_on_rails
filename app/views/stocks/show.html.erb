@@ -20,6 +20,11 @@
   <%= @stock.total_price %>
 </p>
 
+<p>
+  <strong>Template:</strong>
+  <%= @stock.is_stock_template %>
+</p>
+
 <%= link_to 'Edit', edit_stock_path(@stock) %> |
 <%= link_to 'Back', stocks_path %> |
 <%= link_to 'Items', stock_stock_items_path(@stock) %>

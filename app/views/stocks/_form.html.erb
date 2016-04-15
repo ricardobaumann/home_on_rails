@@ -25,6 +25,18 @@
     <%= f.select :place_id, options_for_select(Place.all.map{|s|[s.name, s.id]},@stock.place_id) %>
   </div>
 
+  <div class="field">
+    <%= f.label :is_stock_template %><br>
+    <%= f.check_box :is_stock_template %>
+  </div>
+
+  <div class="field">
+    <%= f.label :stock_template %><br />
+    <%= f.select :stock_id, options_for_select(Stock.where(is_stock_template: true).map{|s|[s.to_s, s.id]}.insert(0,""),@stock.stock_id) %>
+  </div>
+
+  
+
   <div class="actions">
     <%= f.submit %>
   </div>

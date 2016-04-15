@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160415095012) do
+ActiveRecord::Schema.define(version: 20160415104219) do
 
   create_table "metric_units", force: :cascade do |t|
     t.string   "name"
@@ -71,9 +71,12 @@ ActiveRecord::Schema.define(version: 20160415095012) do
     t.datetime "updated_at",         null: false
     t.decimal  "price"
     t.integer  "place_id"
+    t.boolean  "is_stock_template"
+    t.integer  "stock_id"
   end
 
   add_index "stocks", ["place_id"], name: "index_stocks_on_place_id"
+  add_index "stocks", ["stock_id"], name: "index_stocks_on_stock_id"
   add_index "stocks", ["stock_operation_id"], name: "index_stocks_on_stock_operation_id"
 
 end

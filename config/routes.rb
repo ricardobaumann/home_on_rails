@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'error/show'
+
   resources :places
   get 'reports/show'
 

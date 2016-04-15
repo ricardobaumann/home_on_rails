@@ -4,4 +4,11 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   skip_before_action :verify_authenticity_token
+
+  rescue_from ActiveRecord::DeleteRestrictionError, with: :handle_error
+
+  def handle_error(exception)
+  	p exception.backtrace.join("\n")
+  	redirect_to controller: 'error', action: 'show', exception: exception, stack: exception.backtrace.join("\n")[0,100]
+  end
 end
