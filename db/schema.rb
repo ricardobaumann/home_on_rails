@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160415104219) do
+ActiveRecord::Schema.define(version: 20160509130944) do
 
   create_table "metric_units", force: :cascade do |t|
     t.string   "name"
@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(version: 20160415104219) do
     t.integer  "place_id"
     t.boolean  "is_stock_template"
     t.integer  "stock_id"
+    t.decimal  "refund"
   end
 
   add_index "stocks", ["place_id"], name: "index_stocks_on_place_id"

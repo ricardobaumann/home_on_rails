@@ -4,18 +4,28 @@ class Stock < ActiveRecord::Base
   belongs_to :place
   belongs_to :stock
 
-  validates_presence_of :stock_operation, :place, :entry_date
+  validates_presence_of :stock_operation, :place, :entry_date, :refund
 
   before_create :check_template_fields
 
   after_create :check_template_items
+
+  after_initialize :init
+
+  def init
+    self.refund||=0
+  end
 
   def to_s
   	"#{entry_date} - #{stock_operation}"
   end
 
   def total_price
-  	self.stock_items.sum(:item_prize)
+  	items_price - refund
+  end
+
+  def items_price
+    self.stock_items.sum(:item_prize)
   end
 
   def check_template_fields

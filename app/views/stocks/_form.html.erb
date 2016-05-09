@@ -25,6 +25,12 @@
     <%= f.select :place_id, options_for_select(Place.all.map{|s|[s.name, s.id]},@stock.place_id) %>
   </div>
 
+
+   <div class="field">
+    <%= f.label :refund %><br>
+    <%= f.text_field :refund %>
+  </div>
+
   <div class="field">
     <%= f.label :is_stock_template %><br>
     <%= f.check_box :is_stock_template %>
