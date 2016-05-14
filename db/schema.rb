@@ -14,70 +14,77 @@
 ActiveRecord::Schema.define(version: 20160509130944) do
 
   create_table "metric_units", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "places", force: :cascade do |t|
-    t.string   "name"
-    t.text     "address"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "name",       limit: 255
+    t.text     "address",    limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "product_groups", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "products", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "product_group_id"
-    t.integer  "metric_unit_id"
-    t.decimal  "unit_prize"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.string   "name",             limit: 255
+    t.integer  "product_group_id", limit: 4
+    t.integer  "metric_unit_id",   limit: 4
+    t.decimal  "unit_prize",                   precision: 10
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
   end
 
-  add_index "products", ["metric_unit_id"], name: "index_products_on_metric_unit_id"
-  add_index "products", ["product_group_id"], name: "index_products_on_product_group_id"
+  add_index "products", ["metric_unit_id"], name: "index_products_on_metric_unit_id", using: :btree
+  add_index "products", ["product_group_id"], name: "index_products_on_product_group_id", using: :btree
 
   create_table "stock_items", force: :cascade do |t|
-    t.integer  "stock_id"
-    t.integer  "product_id"
-    t.decimal  "unit_prize"
-    t.decimal  "amount"
-    t.decimal  "item_prize"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "stock_id",   limit: 4
+    t.integer  "product_id", limit: 4
+    t.decimal  "unit_prize",           precision: 10
+    t.decimal  "amount",               precision: 10
+    t.decimal  "item_prize",           precision: 10
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
-  add_index "stock_items", ["product_id"], name: "index_stock_items_on_product_id"
-  add_index "stock_items", ["stock_id"], name: "index_stock_items_on_stock_id"
+  add_index "stock_items", ["product_id"], name: "index_stock_items_on_product_id", using: :btree
+  add_index "stock_items", ["stock_id"], name: "index_stock_items_on_stock_id", using: :btree
 
   create_table "stock_operations", force: :cascade do |t|
-    t.integer  "stock_type"
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "stock_type", limit: 4
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "stocks", force: :cascade do |t|
     t.datetime "entry_date"
-    t.integer  "stock_operation_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-    t.decimal  "price"
-    t.integer  "place_id"
+    t.integer  "stock_operation_id", limit: 4
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
+    t.decimal  "price",                        precision: 10
+    t.integer  "place_id",           limit: 4
     t.boolean  "is_stock_template"
-    t.integer  "stock_id"
-    t.decimal  "refund"
+    t.integer  "stock_id",           limit: 4
+    t.decimal  "refund",                       precision: 10
   end
 
-  add_index "stocks", ["place_id"], name: "index_stocks_on_place_id"
-  add_index "stocks", ["stock_id"], name: "index_stocks_on_stock_id"
-  add_index "stocks", ["stock_operation_id"], name: "index_stocks_on_stock_operation_id"
+  add_index "stocks", ["place_id"], name: "index_stocks_on_place_id", using: :btree
+  add_index "stocks", ["stock_id"], name: "index_stocks_on_stock_id", using: :btree
+  add_index "stocks", ["stock_operation_id"], name: "index_stocks_on_stock_operation_id", using: :btree
 
+  add_foreign_key "products", "metric_units"
+  add_foreign_key "products", "product_groups"
+  add_foreign_key "stock_items", "products"
+  add_foreign_key "stock_items", "stocks"
+  add_foreign_key "stocks", "places"
+  add_foreign_key "stocks", "stock_operations"
+  add_foreign_key "stocks", "stocks"
 end
