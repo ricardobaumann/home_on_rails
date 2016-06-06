@@ -1,15 +1,17 @@
-web:
+weba:
   build: .
   volumes:
     - .:/home_on_rails
+  expose:
+    - 3000
   ports:
-    - "3000:3000"
+    - 3000:3000
   links:
     - db
 db:
-  image: library/mysql:5.6.22
-  ports:
-    - "13306:3306"
+  image: mysql/mysql-server
+  expose:
+   - 3306
   environment:
     MYSQL_DATABASE: home_on_rails
     MYSQL_USER: home_on_rails
