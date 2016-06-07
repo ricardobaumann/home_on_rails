@@ -1,19 +1,33 @@
-weba:
-  build: .
-  volumes:
-    - .:/home_on_rails
-  expose:
-    - 3000
-  ports:
-    - 3000:3000
-  links:
-    - db
-db:
-  image: mysql/mysql-server
-  expose:
-   - 3306
-  environment:
-    MYSQL_DATABASE: home_on_rails
-    MYSQL_USER: home_on_rails
-    MYSQL_PASSWORD: root
-    MYSQL_ROOT_PASSWORD: root
+version: '2'
+services:
+  web:
+    build: .
+    volumes:
+      - .:/home_on_rails
+    links:
+      - db
+    ports:
+      - 3000:80
+    environment:
+     port: 3000
+  lb:
+    image: dockercloud/haproxy
+    links:
+      - web
+    environment:
+      - DOCKER_TLS_VERIFY
+      - DOCKER_HOST
+      - DOCKER_CERT_PATH
+    volumes:
+      - $DOCKER_CERT_PATH:$DOCKER_CERT_PATH
+    ports:
+      - 80:80
+  db:
+    image: mysql/mysql-server
+    expose:
+     - 3306
+    environment:
+      MYSQL_DATABASE: home_on_rails
+      MYSQL_USER: home_on_rails
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root

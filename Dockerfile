@@ -10,4 +10,4 @@ RUN bundle install
 
 ADD . /home_on_rails
 WORKDIR /home_on_rails
-CMD RAILS_ENV=production rake db:migrate && RAILS_ENV=production rails s -b 0.0.0.0
+CMD RAILS_ENV=production rake db:migrate ; RAILS_ENV=production rails s -b 0.0.0.0 -p $port
